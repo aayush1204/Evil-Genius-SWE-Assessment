@@ -45,6 +45,3 @@ This method determines whether entering via the light blue boundary is a common 
 This is a helper method used by calc_common_strategy() to calculate the outer boundary of the light blue boundary. It takes the start and end points of the boundary and the desired distance for the perpendicular line. It calculates the slope of the line, finds the midpoint, calculates the slope perpendicular to the original line, and calculates the coordinates for the perpendicular line at the specified distance from the midpoint.
 
 ---
-
-This documentation report provides an overview of the methods available in the `ProcessGameState` class. The accurate implementation and usage of these methods will depend on the specific requirements and the quality of the underlying game state data.
-
