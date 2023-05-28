@@ -19,7 +19,6 @@ class ProcessGameState:
     def get_data(self):
         return self.data
 
-
     def df_is_in_boundary(self,boundary_limits, df):
 
 
@@ -105,8 +104,7 @@ class ProcessGameState:
 
     # Q2c
     def hiding_spot_identification(self):
-    # Wrong approach because i am dropping duplicates based on elapsed seconds and it resets to 0 at bomb plants so didnt consider that.
-
+   
         set_coor = []
 
         grouped_data = self.data.groupby('round_num')
@@ -197,21 +195,56 @@ class ProcessGameState:
         # plt.show()
 
   # Q1
-    def calc_common_strategy(self, inner_lightblue_boundary):
+
+    def find_perpendicular_line(self,exit_edge):
+    # Extract coordinates from the input points
+        x1, y1 = exit_edge[0]
+        x2, y2 = exit_edge[1]
+
+        # Calculate the slope of the given line
+        original_slope = (y2 - y1) / (x2 - x1)
+
+        # Calculate the slope of the perpendicular line
+        perpendicular_slope = -1 / original_slope
+
+        ls = []
+        # Select one of the points on the given line
+
+        x = x1
+        y = y1
+
+        # Calculate the y-intercept of the perpendicular line
+        y_intercept = y - perpendicular_slope * x
+
+        ls.append((x + 30, perpendicular_slope * (x+30) + y_intercept))
+        ls.append((x - 30, perpendicular_slope * (x-30) + y_intercept))
+
+        x = x2
+        y = y2
+
+        # Calculate the y-intercept of the perpendicular line
+        y_intercept = y - perpendicular_slope * x
+
+        ls.append((x + 30, perpendicular_slope * (x+30) + y_intercept))
+        ls.append((x - 30, perpendicular_slope * (x-30) + y_intercept))
+
+        return ls
+
+    def calc_common_strategy(self, inner_lightblue_boundary, exit_edge):
 
         # inner_lightblue_boundary = [(-1735, 250), (-2024, 398), (-2806, 742), (-2472, 1233), (-1565, 580)]
         # create a new boundary with an offset of 10 just near entrance
         # outer_lightblue_boundary = [(-1735 + 30, 250 - 30), (-2024, 398), (-2806, 742), (-2472, 1233), (-1565 + 30, 580 + 30)]
         outer_lightblue_boundary = inner_lightblue_boundary
-        outer_lightblue_boundary[0] = list(outer_lightblue_boundary[0])
-        outer_lightblue_boundary[0][0] += 30
-        outer_lightblue_boundary[0][1] -= 30
-        outer_lightblue_boundary[0] = tuple(outer_lightblue_boundary[0])
+        new_points = self.find_perpendicular_line(exit_edge)
 
-        outer_lightblue_boundary[-1] = list(outer_lightblue_boundary[-1])
-        outer_lightblue_boundary[-1][0] += 30
-        outer_lightblue_boundary[-1][1] += 30
-        outer_lightblue_boundary[-1] = tuple(outer_lightblue_boundary[-1])
+        for i in new_points:
+            x_point, y_point = i
+
+            if self.row_is_in_boundary(inner_lightblue_boundary,{'x':x_point,'y':y_point}):
+                outer_lightblue_boundary.append((x_point,y_point))
+
+        print(outer_lightblue_boundary)
 
         x_coordinates, y_coordinates = zip(*outer_lightblue_boundary)
 
