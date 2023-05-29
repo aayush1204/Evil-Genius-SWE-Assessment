@@ -130,20 +130,20 @@ class ProcessGameState:
             for new_cat ,new_group in new_grouped_data:
 
                 # Group By based on the coordinates where this player visited
-                for acat, agr in new_group.groupby(['x','y']):
+                for coordinates, new_group_coordinate in new_group.groupby(['x','y']):
           
                     # We can ignore the data after the player is dead
-                    agr = agr[agr['is_alive']==True] 
+                    new_group_coordinate = new_group_coordinate[new_group_coordinate['is_alive']==True] 
           
-                    if len(agr) > 2:
-                        first_row = agr.iloc[0]
+                    if len(new_group_coordinate) > 2:
+                        first_row = new_group_coordinate.iloc[0]
                         prev = first_row['seconds']
                         count_waiting = 0
                         max_waiting = 0
 
                         # For loop to find the maximum 
                         # time the player was waiting at a location in this round
-                        for index, row in agr.iterrows():
+                        for index, row in new_group_coordinate.iterrows():
 
                             if prev == row['seconds']:
                                 continue
@@ -160,7 +160,7 @@ class ProcessGameState:
                         max_waiting = max(max_waiting, count_waiting)
           
                         if max_waiting > 1:
-                            ls_coordinates_with_max_waiting_time.append([acat[0],acat[1],max_waiting])
+                            ls_coordinates_with_max_waiting_time.append([coordinates[0],coordinates[1],max_waiting])
                             continue
 
           
@@ -270,7 +270,7 @@ class ProcessGameState:
         percent_of_attempts = sum(outcomes_list)/len(outcomes_list)
 
         if percent_of_attempts < 0.5:
-            return str("No, it is not a common stratergy as only " + str(percent_of_attempts*100) + "% times which is less than 50% times")
+            return str("No, it is not a common stratergy as only " + str(percent_of_attempts*100) + "% times it is attempted, which is less than our threshold of 50% times")
         else:
             return str("It is a common strategy since " + str(percent_of_attempts*100) + "% times the team attempted to enter from the tunnel")
 
