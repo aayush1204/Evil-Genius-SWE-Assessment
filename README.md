@@ -70,7 +70,6 @@ To use the ProcessGameState class, follow these steps:
 2. Call the desired methods of the class to perform specific calculations and analyses on the game data.
 
     ```python
-    data = game_state.load_data()
     average_timer = game_state.calculate_average_clock_timer()
     hiding_spots = game_state.hiding_spot_identification()
     common_strategy = game_state.calc_common_strategy()
