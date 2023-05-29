@@ -72,7 +72,7 @@ To use the ProcessGameState class, follow these steps:
     ```python
     average_timer = game_state.calculate_average_clock_timer()
     hiding_spots = game_state.hiding_spot_identification()
-    common_strategy = game_state.calc_common_strategy()
+    common_strategy = game_state.calc_common_strategy(inner_boundary,exit_edge)
     ```
 
 
