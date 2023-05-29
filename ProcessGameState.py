@@ -106,7 +106,7 @@ class ProcessGameState:
     # staff where you suspect them to be waiting inside “BombsiteB”
     def hiding_spot_identification(self):
    
-        set_coor = []
+        ls_coordinates_with_max_waiting_time = []
 
         grouped_data = self.data.groupby('round_num')
 
@@ -160,11 +160,11 @@ class ProcessGameState:
                         max_waiting = max(max_waiting, count_waiting)
           
                         if max_waiting > 1:
-                            set_coor.append([acat[0],acat[1],max_waiting])
+                            ls_coordinates_with_max_waiting_time.append([acat[0],acat[1],max_waiting])
                             continue
 
           
-        df_set = pd.DataFrame(set_coor, columns=['x', 'y','waiting'])
+        df_set = pd.DataFrame(ls_coordinates_with_max_waiting_time, columns=['x', 'y','waiting'])
         self.create_plot(df_set)
 
     # Function to generate a Heatmap
@@ -187,7 +187,7 @@ class ProcessGameState:
         # inner_lightblue_boundary = [(-1735, 250), (-2024, 398), (-2806, 742), (-2472, 1233), (-1565, 580)]
         # create a new boundary with an offset of 30 just near exit
         outer_lightblue_boundary = inner_lightblue_boundary
-        new_points = self.find_perpendicular_line(exit_edge)
+        new_points = self.find_outer_boundary_coordinates(exit_edge)
 
         # If any of the new points already are inside the boundary, ignore them
         for i in new_points:
@@ -275,7 +275,7 @@ class ProcessGameState:
             return str("It is a common strategy since " + str(percent_of_attempts*100) + "% times the team attempted to enter from the tunnel")
 
     # Helper function to calculate the outer Boundary which will be used to solve Q2a later
-    def find_perpendicular_line(self,exit_edge):
+    def find_outer_boundary_coordinates(self,exit_edge):
     # Extract coordinates from the input points
         x1, y1 = exit_edge[0]
         x2, y2 = exit_edge[1]

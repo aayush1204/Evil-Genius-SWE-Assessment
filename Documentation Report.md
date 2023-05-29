@@ -40,7 +40,7 @@ This method generates a heatmap plot based on the provided DataFrame. It uses th
 
 This method determines whether entering via the light blue boundary is a common strategy used by Team2 on the T side. It calculates the percentage of rounds in which Team2 enters "BombsiteB" by crossing the light blue boundary and returns a formatted string indicating whether it is a common strategy or not. It uses the row_is_in_boundary() helper method to check if each entry falls within the boundary.
 
-### 10: find_perpendicular_line(exit_edge)
+### 10: find_outer_boundary_coordinates(exit_edge)
 
 This is a helper method used by calc_common_strategy() to calculate the outer boundary of the light blue boundary. It takes the start and end points of the boundary and the desired distance for the perpendicular line. It calculates the slope of the line, finds the midpoint, calculates the slope perpendicular to the original line, and calculates the coordinates for the perpendicular line at the specified distance from the midpoint.
 

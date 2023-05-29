@@ -16,7 +16,7 @@ def get_average_timer():
 @app.route("/Hiding-Spot-Identification")
 def get_hiding_spot():
     obj1.hiding_spot_identification()
-    return "Image created"
+    return "Image created and saved in images folder as hiding_spot.png \n Please check."
 
 @app.route("/Common-Strategy")
 def get_is_common_strategy():
