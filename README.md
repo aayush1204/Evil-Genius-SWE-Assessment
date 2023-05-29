@@ -15,7 +15,7 @@ Make sure to install these dependencies before using the ProcessGameState class.
 ## Usage
 
 
-### Using REST API endpoints
+### 1) Using REST API endpoints
 
 This project provides a REST API for displaying a Matplotlib plot based on the game state data. It includes several endpoints to perform different operations and retrieve specific information from the game state.
 
@@ -44,20 +44,20 @@ Follow these steps:
 
 #### Example Usage
 
-- To calculate the average clock timer:
+1. To calculate the average clock timer:
 - Send a GET request to the `/Average-Timer` endpoint.
 - The response will contain the average time calculated.
 
-- To generate a hiding spot identification image:
+2. To generate a hiding spot identification image:
 - Send a GET request to the `/Hiding-Spot-Identification` endpoint.
 - The response will indicate that the image has been created.
 
-- To check if a common strategy is used:
+3. To check if a common strategy is used:
 - Send a GET request to the `/Common-Strategy` endpoint.
 - The response will indicate whether the strategy is common or not.
 
 
-### Using the ProcessGameState Class
+### 2) Using the ProcessGameState Class
 
 To use the ProcessGameState class, follow these steps:
 
@@ -70,10 +70,9 @@ To use the ProcessGameState class, follow these steps:
 2. Call the desired methods of the class to perform specific calculations and analyses on the game data.
 
     ```python
-    data = game_state.load_data()
     average_timer = game_state.calculate_average_clock_timer()
     hiding_spots = game_state.hiding_spot_identification()
-    common_strategy = game_state.calc_common_strategy()
+    common_strategy = game_state.calc_common_strategy(inner_boundary,exit_edge)
     ```
 
 
