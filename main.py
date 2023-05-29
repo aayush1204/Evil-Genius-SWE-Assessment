@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from ProcessGameState import ProcessGameState
 app = Flask(__name__)
 
@@ -6,7 +6,8 @@ obj1 = ProcessGameState('./data/game_state_frame_data.parquet')
 
 @app.route("/")
 def home():
-    return "Home"
+    text = ""
+    return render_template("index.html")
 
 @app.route("/Average-Timer")
 def get_average_timer():
