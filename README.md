@@ -9,6 +9,7 @@ The ProcessGameState class requires the following dependencies:
 - shapely.geometry: A library for geometric operations and calculations.
 - collections.Counter: A class that provides a simple way to count elements in a list or other iterable.
 - matplotlib.pyplot: A library for creating data visualizations in Python.
+- Flask: A web framework for Python that simplifies the development of web applications.
 
 Make sure to install these dependencies before using the ProcessGameState class.
 
